@@ -57,17 +57,17 @@ const getWeatherForZipCode = async (url, zipCode, countryCode = "us", key) => {
 // ---> POST REQUEST
 const postWeatherEntry = async (url = '', weatherData = {}) => {
     const response = await fetch(url, {
-        method: "POST",
-        credentials: "same-origin",
+        method: 'POST',
+        credentials: 'same-origin',
         headers: {
-            "Content-Type": "application/json"
+            'Content-Type': 'application/json',
         },
-        body: JSON.stringify(weatherData)
+        body: JSON.stringify(weatherData),
     });
 
     try {
         const newData = await response.json();
-        console.log(newData)
+        console.log(newData);
         return newData;
     }
     catch(error) {
@@ -85,11 +85,10 @@ const doAction = () => {
         getWeatherForZipCode(baseURL, postCode, "us" ,apiKey)
         .then(function(data) {
             console.log(data);
-            // !!! --> CALL POST function here
             // append datum and user entry to data object
             data.date = newDate;
             data.userResponse = feelingToday;
-            postWeatherEntry('/addWeatherElement', data)
+            postWeatherEntry('addWeatherElement', data)
         })
         // .then(updateUserInterface) {
 
