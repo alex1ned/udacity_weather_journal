@@ -42,9 +42,12 @@ app.get('/getWeatherData', getRoute);
 // ---> POST ROUTE
 const postRoute = (req, res) => {
     newEntry = {
-        'temperature': req.body.temperature,
-        'date': req.body.date,
-        'userResponse': req.body.userResponse
+        temperature: req.body.temperature,
+        location: req.body.location,
+        country: req.body.country,
+        skyVisibility: req.body.skyVisibility,
+        date: req.body.date,
+        userResponse: req.body.userResponse
     }
     projectData.push(newEntry);
     res.send(projectData);

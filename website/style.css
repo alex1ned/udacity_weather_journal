@@ -59,6 +59,7 @@ input{
     width: 320px;
     background:#22b2da;
     color: #f0d43a;
+    padding: 0 0.5em;
     font-size: 20px;
     font-family: 'Oswald', sans-serif;
     border: none;
@@ -81,7 +82,9 @@ h1{
 textarea{
     background:#22b2da;
     color: #f0d43a;
+    height: 60px;
     font-size: 20px;
+    padding: 0.5em 0.5em;
     font-family: 'Oswald', sans-serif;
 }
 /* Reset style for HTML element on active to have no border*/
