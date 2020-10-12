@@ -111,3 +111,19 @@ window.addEventListener("keyup", function(event) {
 
 
 /* ------------------------ END OF FILE ------------------------*/
+
+
+// --> Try if routes work
+// 1) Global get
+const getWeatherFromBack = async (url) => {
+    const response = await fetch(url);
+    
+    try {
+        const response_js = await response.json();
+        console.log(response_js);
+    }
+    catch(error) {
+         console.log(error);
+    }
+};
+getWeatherFromBack('/getWeatherData');

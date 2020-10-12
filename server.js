@@ -1,7 +1,10 @@
 // Setup empty JS object to act as endpoint for all routes
-projectData = {};
-const PORT = 8080;
+projectData = {
+    sample: 'a',
+    letter: 'b'
+};
 
+const PORT = 8080;
 
 // Require Express to run server and routes
 const express = require('express');
@@ -25,16 +28,17 @@ app.use(express.static('website'));
 
 
 // Setup Server
-app.listen(PORT, () => {
-    console.log(`Server listening on port ${PORT}`);
-});
+const listening = (port) => {
+    console.log(`Server listening on port ${port}`);
+};
+const server = app.listen(PORT, listening(PORT));
 
 
 // --------------------------> ROUTES
 // ---> GET ROUTE
 const getRoute = (req, res) => {
     res.send(projectData);
-    console.log(projectData);
+    // console.log(projectData);
 };
 app.get('/getWeatherData', getRoute);
 
