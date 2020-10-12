@@ -4,17 +4,25 @@ const baseURL = "https://api.openweathermap.org/data/2.5/weather?zip=";
 const generateButton = document.querySelector("#generate");
 const zipInput = document.querySelector("#zip");
 
-// ---> API END-POINT CITY NAME
-// const baseURL = "api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}"
-// const baseURL = `api.openweathermap.org/data/2.5/weather?q=${London}&appid=${apiKey}`;
-
-// ---> API END-POINT BY ZIP CCODE
-// api.openweathermap.org/data/2.5/weather?zip={zip code},{country code}&appid={API key}
-
 // Create a new date instance dynamically with JS
 let d = new Date();
 let newDate = (d.getMonth()+1) +'.'+ d.getDate()+'.'+ d.getFullYear();
 
+
+// --> Try if routes work
+// 1) Global get
+const getWeatherFromBack = async (url) => {
+    const response = await fetch(url);
+    
+    try {
+        const response_js = await response.json();
+        console.log(response_js);
+    }
+    catch(error) {
+         console.log(error);
+    }
+};
+getWeatherFromBack('/getWeatherData');
 
 
 /* 2) ---------------------------------- HELPER FUNCTIONS */
@@ -27,9 +35,7 @@ const eachFirstLetterToUppercase = (string) => {
     return words.join(" ");
 };
 
-
 /* 3) ---------------------------------- ASYNC JS */
-
 // ---> API Call to OpenWeatherMap.org
 const getWeatherForZipCode = async (url, zipCode, countryCode = "us", key) => {
     const response = await fetch(url + zipCode + "," + countryCode + key);
@@ -51,7 +57,6 @@ const getWeatherForZipCode = async (url, zipCode, countryCode = "us", key) => {
     }
 };
 
-// --> !!! DELETE --> test if API works
 // getWeatherForZipCode(baseURL, "54214", "us", apiKey);
 
 // ---> POST REQUEST
@@ -91,11 +96,10 @@ const doAction = () => {
             postWeatherEntry('addWeatherElement', data)
         })
         // .then(updateUserInterface) {
-
+            // Still to do
         // }
     }
 };
-
 
 
 /* 5) ---------------------------------- CALLING EVENT LISTENERS */
@@ -103,27 +107,8 @@ const doAction = () => {
 generateButton.addEventListener('click', doAction);
 
 // --> MAKE API CALL UPON PRESSING THE ENTER KEY
-window.addEventListener("keyup", function(event) {
-    if (event.keyCode === 13) {
-        doAction();
-    }
-});
-
-
-/* ------------------------ END OF FILE ------------------------*/
-
-
-// --> Try if routes work
-// 1) Global get
-const getWeatherFromBack = async (url) => {
-    const response = await fetch(url);
-    
-    try {
-        const response_js = await response.json();
-        console.log(response_js);
-    }
-    catch(error) {
-         console.log(error);
-    }
-};
-getWeatherFromBack('/getWeatherData');
+// window.addEventListener("keyup", function(event) {
+//     if (event.keyCode === 13) {
+//         doAction();
+//     }
+// });
