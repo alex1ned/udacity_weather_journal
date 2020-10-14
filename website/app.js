@@ -66,15 +66,18 @@ const postWeatherEntry = async (url = '', weatherData = {}) => {
 // ---> UPDATE USER INTERFACE
 const updateUserInterface = async () => {
     const request = await fetch("/getWeatherData");
-
     try {
-        const allData = await request.json(); 
-        document.querySelector("#date").innerHTML = `Date: ${allData[0].date}`;
-        document.querySelector("#temp").innerHTML = `Temperature: ${allData[0].temperature} Fahrenheit`;
-        document.querySelector("#content").innerHTML = `User Response: ${allData[0].userResponse}`;
-        document.querySelector("#location").innerHTML = `Location: ${allData[0].location}`;
-        document.querySelector("#sky").innerHTML = `Sky Visibility: ${allData[0].skyVisibility}`;
-        console.log(allData);
+        const allData = await request.json();
+        const length = allData.length;
+        // !!! - DEBUG
+        // console.log(allData);
+        // console.log(length);
+        document.querySelector("#date").innerHTML = `Date: ${allData[length-1].date}`;
+        document.querySelector("#temp").innerHTML = `Temperature: ${allData[length-1].temperature} Fahrenheit`;
+        document.querySelector("#content").innerHTML = `User Response: ${allData[length-1].userResponse}`;
+        document.querySelector("#location").innerHTML = `Location: ${allData[length-1].location}`;
+        document.querySelector("#sky").innerHTML = `Sky Visibility: ${allData[length-1].skyVisibility}`;
+        
     }
     catch(error) {
         console.log("error", error);
@@ -101,7 +104,6 @@ const doAction = () => {
         getWeatherForZipCode(baseURL, postCode, "us" ,apiKey)
         .then(
             function(data) {
-                // console.log(data);
                 // append datum and user entry to data object
                 data.date = newDate;
                 data.userResponse = feelingToday;

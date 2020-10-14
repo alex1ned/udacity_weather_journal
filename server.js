@@ -35,7 +35,6 @@ const server = app.listen(PORT, listening(PORT));
 // ---> GET ROUTE
 const getRoute = (req, res) => {
     res.send(projectData);
-    // console.log(projectData);
 };
 app.get('/getWeatherData', getRoute);
 
@@ -54,3 +53,5 @@ const postRoute = (req, res) => {
     res.send(projectData);
 };
 app.post('/addWeatherElement', postRoute);
+
+/* ------------------------ END OF FILE ------------------------*/
