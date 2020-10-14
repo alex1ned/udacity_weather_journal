@@ -1,8 +1,5 @@
 // Setup empty JS object to act as endpoint for all routes
-projectData = {
-    sample: 'a',
-    letter: 'b'
-};
+const projectData = [];
 
 const PORT = 8080;
 
@@ -25,7 +22,7 @@ app.use(cors());
 
 // ---> Initialize the main project folder
 app.use(express.static('website'));
-
+// app.use(express.static('root'))
 
 // Setup Server
 const listening = (port) => {
@@ -38,7 +35,6 @@ const server = app.listen(PORT, listening(PORT));
 // ---> GET ROUTE
 const getRoute = (req, res) => {
     res.send(projectData);
-    // console.log(projectData);
 };
 app.get('/getWeatherData', getRoute);
 
@@ -55,6 +51,7 @@ const postRoute = (req, res) => {
     }
     projectData.push(newEntry);
     res.send(projectData);
-    console.log(projectData);
 };
 app.post('/addWeatherElement', postRoute);
+
+/* ------------------------ END OF FILE ------------------------*/

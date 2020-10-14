@@ -1,13 +1,12 @@
 body{
     background: #fffff8;
     font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    margin: 0 0;
 }
 
 #app{
     display: grid;
     grid-auto-rows: minmax(150px, auto);
-    /* grid-template-columns:  */
-    height:100vh;
     background: #f23557;
     color: #f0d43a;
     justify-content: center;
@@ -17,15 +16,30 @@ body{
 }
 
 .holder{
-
+    display: flex;
+    flex-direction: column;
+    font-size: 3em;
+    margin-top: 1em;
 }
+
+#form-container {
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    height: 500px;
+    padding: 0.5em;
+}
+
 
 .entry{
     background: rgba(59, 74, 107, .4);
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 0.2em;
 }
 
 #entryHolder{
-
+    font-size: 0.4em;
 }
 
 #date{
@@ -44,19 +58,18 @@ body{
 
 }
 .title{
-
+    font-size: 0.5em;
 }
 
 /*  Basic Styling To Override Default For Basic HTML Elements */
 label{
-    display:block;
     font-size: 27px;
+    width: 95%;
 }
 
 input{
-    display:block;
     height: 60px;
-    width: 320px;
+    width: 95%;
     background:#22b2da;
     color: #f0d43a;
     padding: 0 0.5em;
@@ -66,11 +79,12 @@ input{
 }
 
 button{
-    width: 400px;
-    height: 100px;
+    width: 95%;
+    height: 50px;
     background: #3b4a6b;
     color: #f0d43a;
     font-size: 26px;
+    margin-top: 50px;
     font-family: 'Oswald', sans-serif;
     border: none;
     box-shadow: 2px 4px 5px #444;
@@ -98,17 +112,14 @@ button:focus {
 ::placeholder { /* Firefox, Chrome, Opera */ 
     color: #f0d43a; 
     font-family: 'Oswald', sans-serif;
-
 } 
   
 :-ms-input-placeholder { /* Internet Explorer 10-11 */ 
     color: #f0d43a; 
     font-family: 'Oswald', sans-serif;
-
 } 
   
 ::-ms-input-placeholder { /* Microsoft Edge */ 
     color: #f0d43a; 
     font-family: 'Oswald', sans-serif;
-
 } 

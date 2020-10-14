@@ -4,25 +4,10 @@ const baseURL = "https://api.openweathermap.org/data/2.5/weather?zip=";
 const generateButton = document.querySelector("#generate");
 const zipInput = document.querySelector("#zip");
 
-// Create a new date instance dynamically with JS
+
+// --- Create a new date instance dynamically with JS
 let d = new Date();
 let newDate = (d.getMonth()+1) +'.'+ d.getDate()+'.'+ d.getFullYear();
-
-
-// --> Try if routes work
-// 1) Global get
-const getWeatherFromBack = async (url) => {
-    const response = await fetch(url);
-    
-    try {
-        const response_js = await response.json();
-        console.log(response_js);
-    }
-    catch(error) {
-         console.log(error);
-    }
-};
-getWeatherFromBack('/getWeatherData');
 
 
 /* 2) ---------------------------------- HELPER FUNCTIONS */
@@ -41,7 +26,6 @@ const getWeatherForZipCode = async (url, zipCode, countryCode = "us", key) => {
     const response = await fetch(url + zipCode + "," + countryCode + key);
     
     try {
-        // SHOULD the below be assigned to a global variable?
         const response_js = await response.json();
         const weatherRequestData = {
             temperature: response_js.main.temp,
@@ -49,7 +33,6 @@ const getWeatherForZipCode = async (url, zipCode, countryCode = "us", key) => {
             country: response_js.sys.country,
             skyVisibility: eachFirstLetterToUppercase(response_js.weather[0].description)
         };
-        // console.log(weatherRequestData);
         return weatherRequestData;
     }
     catch(error) {
@@ -57,7 +40,6 @@ const getWeatherForZipCode = async (url, zipCode, countryCode = "us", key) => {
     }
 };
 
-// getWeatherForZipCode(baseURL, "54214", "us", apiKey);
 
 // ---> POST REQUEST
 const postWeatherEntry = async (url = '', weatherData = {}) => {
@@ -72,7 +54,6 @@ const postWeatherEntry = async (url = '', weatherData = {}) => {
 
     try {
         const newData = await response.json();
-        console.log(newData);
         return newData;
     }
     catch(error) {
@@ -81,34 +62,68 @@ const postWeatherEntry = async (url = '', weatherData = {}) => {
 };
 
 
-/* 4) ---------------------------------- DOM MANIPULATIONS */
+// ---> UPDATE USER INTERFACE
+const updateUserInterface = async () => {
+    const request = await fetch("/getWeatherData");
+    try {
+        const allData = await request.json();
+        const length = allData.length;
+        document.querySelector("#date").innerHTML = `Date: ${allData[length-1].date}`;
+        document.querySelector("#temp").innerHTML = `Temperature: ${allData[length-1].temperature} Fahrenheit`;
+        document.querySelector("#content").innerHTML = `User Response: ${allData[length-1].userResponse}`;
+        document.querySelector("#location").innerHTML = `Location: ${allData[length-1].location}`;
+        document.querySelector("#sky").innerHTML = `Sky Visibility: ${allData[length-1].skyVisibility}`;
+        
+    }
+    catch(error) {
+        console.log("error", error);
+    }
+};
+
+
+
+/* 4) ---------------------------------- On ENTER or Click perform */
+//    following squence:
+//     - Get the value of the 'zip code' and 'feeling' entered by
+//       user, and if both contain a value then....
+//     - Make API Call to OpenWeatherMap.org which returns an
+//       object JSON (location, temperature, sky, country)
+//     - Then ... to the returned object, append the data and user
+//       response and then POST the completed object to the server
+//     - Then ... update the user interface accordingly by first
+//       retrieving the whole object from the backend with GET
 const doAction = () => {
     const postCode = document.querySelector("#zip").value;
     const feelingToday = document.querySelector("#feelings").value;
     
     if (postCode && feelingToday) {
         getWeatherForZipCode(baseURL, postCode, "us" ,apiKey)
-        .then(function(data) {
-            console.log(data);
-            // append datum and user entry to data object
-            data.date = newDate;
-            data.userResponse = feelingToday;
-            postWeatherEntry('addWeatherElement', data)
-        })
-        // .then(updateUserInterface) {
-            // Still to do
-        // }
+        .then(
+            function(data) {
+                // append datum and user entry to data object
+                data.date = newDate;
+                data.userResponse = feelingToday;
+                postWeatherEntry('/addWeatherElement', data)
+            }
+        )
+        .then(
+            updateUserInterface()
+        )
     }
 };
 
 
-/* 5) ---------------------------------- CALLING EVENT LISTENERS */
+
+/* 5) ---------------------------------- INNITIATE EVENT LISTENERS */
 // --> MAKE API CALL UPON CLICKING 'GENERATE BUTTON'
 generateButton.addEventListener('click', doAction);
 
 // --> MAKE API CALL UPON PRESSING THE ENTER KEY
-// window.addEventListener("keyup", function(event) {
-//     if (event.keyCode === 13) {
-//         doAction();
-//     }
-// });
+window.addEventListener("keyup", function(event) {
+    if (event.keyCode === 13) {
+        doAction();
+    }
+});
+
+
+/* ------------------------ END OF FILE ------------------------*/
