@@ -4,17 +4,10 @@ const baseURL = "https://api.openweathermap.org/data/2.5/weather?zip=";
 const generateButton = document.querySelector("#generate");
 const zipInput = document.querySelector("#zip");
 
-// ---> API END-POINT CITY NAME
-// const baseURL = "api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}"
-// const baseURL = `api.openweathermap.org/data/2.5/weather?q=${London}&appid=${apiKey}`;
 
-// ---> API END-POINT BY ZIP CCODE
-// api.openweathermap.org/data/2.5/weather?zip={zip code},{country code}&appid={API key}
-
-// Create a new date instance dynamically with JS
+// --- Create a new date instance dynamically with JS
 let d = new Date();
 let newDate = (d.getMonth()+1) +'.'+ d.getDate()+'.'+ d.getFullYear();
-
 
 
 /* 2) ---------------------------------- HELPER FUNCTIONS */
@@ -26,8 +19,6 @@ const eachFirstLetterToUppercase = (string) => {
     }
     return words.join(" ");
 };
-
-
 
 
 /* 3) ---------------------------------- ASYNC JS */
@@ -138,23 +129,6 @@ window.addEventListener("keyup", function(event) {
 
 
 /* ------------------------ END OF FILE ------------------------*/
-
-
-// --> Try if routes work
-// 1) Global get
-// const getWeatherFromBack = async (url) => {
-//     const response = await fetch(url);
-    
-//     try {
-//         const response_js = await response.json();
-//         console.log(response_js);
-//     }
-//     catch(error) {
-//          console.log(error);
-//     }
-// };
-// getWeatherFromBack('/getWeatherData');
-
 
 // --> !!! DELETE --> test if API works
 // getWeatherForZipCode(baseURL, "54214", "us", apiKey);
