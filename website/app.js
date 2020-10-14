@@ -69,9 +69,6 @@ const updateUserInterface = async () => {
     try {
         const allData = await request.json();
         const length = allData.length;
-        // !!! - DEBUG
-        // console.log(allData);
-        // console.log(length);
         document.querySelector("#date").innerHTML = `Date: ${allData[length-1].date}`;
         document.querySelector("#temp").innerHTML = `Temperature: ${allData[length-1].temperature} Fahrenheit`;
         document.querySelector("#content").innerHTML = `User Response: ${allData[length-1].userResponse}`;
@@ -131,6 +128,3 @@ window.addEventListener("keyup", function(event) {
 
 
 /* ------------------------ END OF FILE ------------------------*/
-
-// --> !!! DELETE --> test if API works
-// getWeatherForZipCode(baseURL, "54214", "us", apiKey);

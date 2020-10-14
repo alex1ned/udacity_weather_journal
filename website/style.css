@@ -35,12 +35,10 @@ body{
     background: rgba(59, 74, 107, .4);
     margin-top: 20px;
     margin-bottom: 20px;
-    width: 100% !important;
     padding: 0.2em;
 }
 
 #entryHolder{
-    width: 100% !important;
     font-size: 0.4em;
 }
 
@@ -61,7 +59,6 @@ body{
 }
 .title{
     font-size: 0.5em;
-    width: 100% !important;
 }
 
 /*  Basic Styling To Override Default For Basic HTML Elements */
