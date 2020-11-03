@@ -1,5 +1,5 @@
 /* 1) ---------------------------------- GLOBAL VARIABLES */
-const apiKey = "&appid=d3f0862f81b030f725039d2bbd9b3237";
+const apiKey = "YOUR API KEY";
 const baseURL = "https://api.openweathermap.org/data/2.5/weather?zip=";
 const generateButton = document.querySelector("#generate");
 const zipInput = document.querySelector("#zip");
